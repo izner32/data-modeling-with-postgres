@@ -16,5 +16,7 @@
             - primary key for obviously primary key 
             - not null for IDs that aren't primary key, because primary key are already auto not null values 
 - create an sql query to code the star schema created 
-    - create sql query for creating each of the table 
-    - 
+    - create function that drops and create table 
+        - create sql query for dropping then creating each of the table | drop table to make sure they doesn't exist when we create them  
+    - create a function that inserts record on each table 
+        - create sql query that inserts record on each table 
