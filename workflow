@@ -1,0 +1,20 @@
+- create an er diagram (physical er diagram) (star schema for one dimension): use app.diagrams.net 
+    - determine fact table
+    - determine dimension tables 
+    - determine relationships for each table 
+    - determine field for each table 
+    - determine the primary and foreign keys in each table 
+    - determine datatypes and constraints for each field in each table 
+        - datatypes
+            - varchar(size) for strings 
+            - char(1) for characters | e.g. m or f 
+            - float(size) for numbers with floating points
+            - integers for whole numbers 
+            - timestamp for dates (date with mm/dd/yyyy)
+            - serial for primary keys for fact tables | used to automatically generate unique integer numbers (IDs, identity, etc.)
+        - constraints 
+            - primary key for obviously primary key 
+            - not null for IDs that aren't primary key, because primary key are already auto not null values 
+- create an sql query to code the star schema created 
+    - create sql query for creating each of the table 
+    - 
