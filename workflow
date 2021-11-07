@@ -16,11 +16,16 @@
             - primary key for obviously primary key 
             - not null for IDs that aren't primary key, because primary key are already auto not null values 
 - code the star schema created 
-    - create a database then connect and query with that database connection
-    - create function that drops and create table 
-        - create sql query for dropping then creating each of the table | drop table to make sure they doesn't exist when we create them  
-    - create sql query that inserts record on each table 
-- create an etl to transform and clean the data before loading it into schema(collection of tables) created above 
+    - create database
+    - create table
+- staging area 
+    - extract data from primary source 
+    - load it into a dataframe 
+    - transform and clean the values inside the dataframe
+- create an etl to transform and clean the data before loading it into respective tables
     - extract 
+        - extract values you need from the cleaned dataframe 
     - transform 
+        - transform it the way it would fit the way you want in a table 
     - load 
+        - loading thru inserting values at the database table
