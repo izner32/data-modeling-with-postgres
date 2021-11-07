@@ -5,7 +5,7 @@ songs_dimension_drop = "DROP TABLE IF EXISTS songs"
 time_dimension_drop = "DROP TABLE IF EXISTS time"
 artist_dimension_drop = "DROP TABLE IF EXISTS artists"
 
-# create table query 
+# create table queries
 songplays_fact_create = ("""
     CREATE TABLE IF NOT EXISTS songplays (
         songplay_id SERIAL PRIMARY KEY,
@@ -35,7 +35,7 @@ songs_dimension_create = ("""
         song_id VARCHAR(20) PRIMARY KEY,
         title VARCHAR(100),
         artist_id VARCHAR(20) NOT NULL,
-        year INTEGER
+        year INTEGER,
         duration FLOAT(5)
     ); 
 """)
@@ -60,6 +60,37 @@ artists_dimension_create = ("""
         latitude FLOAT(5),
         longitude FLOAT(5)
     );
+""")
+
+# insert values inside table queries
+songplays_fact_insert = ("""
+    INSERT INTO songplays (songplay_id, start_time, user_id, level, song_id, artist_id, session_id, location, user_agent)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    ON CONFLICT(songplay_id) DO NOTHING;
+""")
+
+user_dimension_insert = ("""
+    INSERT INTO users (user_id, first_name, last_name, gender, level)
+    VALUES (%s, %s, %s, %s, %s) 
+    ON CONFLICT (user_id) DO UPDATE SET level = EXCLUDED.level;
+""")
+
+song_dimension_insert = ("""
+    INSERT INTO songs (song_id, title, artist_id, year, duration)
+    VALUES (%s, %s, %s, %s, %s) 
+    ON CONFLICT DO NOTHING;
+""")
+
+time_dimension_insert = ("""
+    INSERT INTO time (start_time, hour, day, week, month, year, weekday)
+    VALUES (%s, %s, %s, %s, %s, %s, %s) 
+    ON CONFLICT DO NOTHING;
+""")
+
+artist_dimension_insert = ("""
+    INSERT INTO artists (artist_id, name, location, lattitude, longitude)
+    VALUES (%s, %s, %s, %s, %s) 
+    ON CONFLICT DO NOTHING;
 """)
 
 drop_table_queries = [songplays_fact_drop,users_dimension_drop,songs_dimension_drop,time_dimension_drop,artist_dimension_drop]

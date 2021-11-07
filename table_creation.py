@@ -1,10 +1,14 @@
+import os # we need this to use dotenv 
 import psycopg2 # to connect to postgres database 
 from table_queries import drop_table_queries,create_table_queries# importing sql queries
+from dotenv import load_dotenv, find_dotenv # to access the secret keys we've hidden in a separate file 
+
+load_dotenv(find_dotenv()) # grab values inside env file
 
 # connecting to database then using this connection to execute sql queries
 def create_database():
-    # connect to default database 
-    conn = psycopg2.connect("")
+    # connect to default database - only the password isn't default in here since you set it up when you install postgresql
+    conn = psycopg2.connect(host="localhost", port="5432",database="postgres",user="postgres",password=os.getenv("DB_PASSWORD"))
     conn.set_session(autocommit = True) # we need to commit every query execution, but with this we don't have to anymore
     cur = conn.cursor() # creating a cursor to execute queries
 
@@ -16,7 +20,7 @@ def create_database():
     conn.close()
 
     # connect to database(sparkifydb) we just created 
-    conn = psycopgy2.connect("")
+    conn = psycopg2.connect(host="localhost", port="5432",database="sparkifydb",user="postgres",password=os.getenv("DB_PASSWORD"))
     conn.set_session(autocommit = True) 
     cur = conn.cursor()
 
@@ -33,3 +37,15 @@ def create_tables(conn,cur):
     for i in create_table_queries:
         cur.execute(i)
         conn.commit() # commit every time we drop a table 
+
+# invoking the functions created in main function - where main thread executes 
+def main():
+    cur, conn = create_database()
+    
+    drop_tables(cur, conn)
+    create_tables(cur, conn)
+
+    conn.close()
+
+main()
+        
