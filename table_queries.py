@@ -69,13 +69,13 @@ songplays_fact_insert = ("""
     ON CONFLICT(songplay_id) DO NOTHING;
 """)
 
-user_dimension_insert = ("""
+users_dimension_insert = ("""
     INSERT INTO users (user_id, first_name, last_name, gender, level)
     VALUES (%s, %s, %s, %s, %s) 
     ON CONFLICT (user_id) DO UPDATE SET level = EXCLUDED.level;
 """)
 
-song_dimension_insert = ("""
+songs_dimension_insert = ("""
     INSERT INTO songs (song_id, title, artist_id, year, duration)
     VALUES (%s, %s, %s, %s, %s) 
     ON CONFLICT DO NOTHING;
@@ -87,8 +87,8 @@ time_dimension_insert = ("""
     ON CONFLICT DO NOTHING;
 """)
 
-artist_dimension_insert = ("""
-    INSERT INTO artists (artist_id, name, location, lattitude, longitude)
+artists_dimension_insert = ("""
+    INSERT INTO artists (artist_id, name, location, latitude, longitude)
     VALUES (%s, %s, %s, %s, %s) 
     ON CONFLICT DO NOTHING;
 """)
