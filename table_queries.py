@@ -93,6 +93,7 @@ artists_dimension_insert = ("""
     ON CONFLICT DO NOTHING;
 """)
 
+
 drop_table_queries = [songplays_fact_drop,users_dimension_drop,songs_dimension_drop,time_dimension_drop,artist_dimension_drop]
 create_table_queries = [songplays_fact_create,users_dimension_create,songs_dimension_create,time_dimension_create,artists_dimension_create]
 
