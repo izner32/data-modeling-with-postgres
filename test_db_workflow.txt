@@ -1,0 +1,7 @@
+query in psql
+    connect to database 
+    \l - find for right database 
+    \c rightDB - create connection to db 
+    \dt - find for table you've wanted to create query from 
+    SELECT * FROM sampleTable LIMIT 5; - select all of the columns from sampleTable but only show 5 rows
+    
